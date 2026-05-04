@@ -1,0 +1,15 @@
+# requirements.txt
+# Cinematic Video Generation Pipeline (API-Free)
+
+# Core processing
+opencv-python>=4.9.0
+numpy>=1.26.0
+tqdm>=4.66.0
+PyYAML>=6.0.0
+
+# Audio handling
+pydub>=0.25.1
+audioop-lts; python_version >= '3.13'
+
+# FFmpeg binary management
+imageio-ffmpeg>=0.6.0

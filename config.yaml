@@ -1,0 +1,16 @@
+# config.yaml
+# Cinematic Video Pipeline Configuration
+
+# Video Settings
+fps: 24
+resolution: [1280, 720]
+crf: 18                    # Quality (18-24 is standard, lower is better)
+seconds_per_scene: 3.0     # Total duration each scene folder should occupy
+
+# Color Grading Settings
+vignette_strength: 0.3
+warm_shift: [0.92, 1.02, 1.08] # BGR shift (0.92 B, 1.02 G, 1.08 R) for warm cinematic look
+
+# Performance Settings
+batch_size: 50             # Number of frames to keep in RAM before flushing to disk
+png_compression: 1         # 0-9 (1 is fast and near-lossless)
