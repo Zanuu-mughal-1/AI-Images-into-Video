@@ -1,0 +1,2 @@
+[tool.pyrefly]
+site-package-path = [".venv/Lib/site-packages"]
