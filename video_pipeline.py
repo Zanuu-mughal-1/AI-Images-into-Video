@@ -24,7 +24,7 @@ try:
     import audioop
 except ImportError:
     try:
-        import audioop_lts as audioop
+        import audioop_lts as audioop  # type: ignore
         sys.modules['audioop'] = audioop
     except ImportError:
         pass
