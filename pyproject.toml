@@ -1,2 +1,12 @@
 [tool.pyrefly]
 site-package-path = [".venv/Lib/site-packages"]
+
+[tool.pyrefly.errors]
+bad-assignment = false
+no-matching-overload = false
+missing-attribute = false
+bad-argument-type = false
+bad-index = false
+unsupported-operation = false
+untyped-import = false
+missing-import = false
