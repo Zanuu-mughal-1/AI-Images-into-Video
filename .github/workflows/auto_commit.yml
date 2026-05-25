@@ -1,0 +1,87 @@
+name: Generate Automated GitHub Activity
+
+on:
+  schedule:
+    # Run three times a day at semi-random intervals (UTC times)
+    - cron: '23 5 * * *'   # 5:23 AM UTC
+    - cron: '14 13 * * *'  # 1:14 PM UTC
+    - cron: '47 20 * * *'  # 8:47 PM UTC
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          # Ensure checkout uses the branch we want to push to
+          ref: main
+          persist-credentials: true
+
+      - name: Generate Organic Git Activity
+        run: |
+          # Set git identities using github-actions bot
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # 1. 15% chance to skip commit to make activity look more organic/human
+          SKIP_ROLL=$((RANDOM % 100))
+          if [ $SKIP_ROLL -lt 15 ]; then
+            echo "Organic check: Skip roll ($SKIP_ROLL < 15). No commits made during this run to keep graph looking natural."
+            exit 0
+          fi
+          
+          # 2. Determine number of commits to create (1 to 3 commits)
+          NUM_COMMITS=$(( (RANDOM % 3) + 1 ))
+          echo "Organic check: Proceeding to make $NUM_COMMITS commits."
+          
+          # Array of natural commit messages
+          MESSAGES=(
+            "Refactor activity logging module"
+            "Update dependency configurations"
+            "Optimize internal caching mechanism"
+            "Fix minor formatting and syntax issues"
+            "Update readme documentation with setup steps"
+            "Clean up unused variables and imports"
+            "Improve test coverage for utility helpers"
+            "Adjust configuration parameters in YAML"
+            "Add new helper function for date formatting"
+            "Update system configuration settings"
+            "Optimize code formatting and comments"
+            "Enhance parameter validation checks"
+            "Update project dependencies to latest versions"
+            "Improve logging formatting for debugging"
+            "Minor UI tweak and alignment fixes"
+          )
+          
+          for ((i=1; i<=NUM_COMMITS; i++)); do
+            # Pick a random commit message from the list
+            MSG_INDEX=$((RANDOM % ${#MESSAGES[@]}))
+            COMMIT_MSG="${MESSAGES[$MSG_INDEX]}"
+            
+            # Generate a random 8-character hex ID
+            HEX_ID=$(od -An -N4 -tx /dev/urandom | tr -d ' ')
+            TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+            
+            # Write update to activity log
+            echo "[$TIMESTAMP] Automated GitHub Action Commit $i of $NUM_COMMITS - Run ID: $HEX_ID" >> github_activity.txt
+            
+            # Commit changes
+            git add github_activity.txt
+            git commit -m "$COMMIT_MSG (Automated update)"
+            
+            # Sleep briefly (5-15s) between multiple commits
+            if [ $i -lt $NUM_COMMITS ]; then
+              SLEEP_TIME=$(( (RANDOM % 11) + 5 ))
+              echo "Waiting $SLEEP_TIME seconds before next commit..."
+              sleep $SLEEP_TIME
+            fi
+          done
+          
+          # Push to repository
+          echo "Pushing changes back to main branch..."
+          git push origin main
