@@ -63,7 +63,7 @@ def get_scene_images(scene_path):
 def interpolate_frames(img1, img2, num_frames, flow=None):
     """
     Interpolate between two frames using Farneback Optical Flow.
-    Applies median blur to flow to reduce 'twinkling' artifacts.
+    Applies median blur to smooth the flow field and reduce flickering artifacts.
     """
     gray1 = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)
     gray2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
