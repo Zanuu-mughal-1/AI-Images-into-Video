@@ -183,7 +183,7 @@ def handle_audio(video_duration, output_wav):
     return output_wav
 
 # ==============================================================================
-# 3. MAIN PIPELINE
+# 3. MAIN PIPELINE (scene loading, interpolation, grading, encoding)
 # ==============================================================================
 
 def main():
