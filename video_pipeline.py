@@ -207,7 +207,7 @@ def main():
 
     scenes = get_scenes()
     if not scenes:
-        print("❌ No scenes found in scenes/ directory.")
+        print("❌ No scene folders found in scenes/ directory. Add scene_01, scene_02, etc.")
         return
 
     all_keyframes = []
