@@ -1,7 +1,7 @@
 """
 video_pipeline.py
 -----------------
-Complete, API-free cinematic video generation tool.
+Complete, API-free cinematic video generation pipeline.
 Interpolates keyframes from scene folders using local Optical Flow techniques.
 """
 
