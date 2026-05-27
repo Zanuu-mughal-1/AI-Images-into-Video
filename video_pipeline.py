@@ -341,7 +341,7 @@ def main():
         'output/final_video.mp4'
     ])
     
-    print(f"\n✅ DONE! Video saved to output/final_video.mp4")
+    print(f"\n✅ DONE! Video saved to: output/final_video.mp4")
     if audio_out.exists(): os.remove(audio_out)
 
 if __name__ == "__main__":
