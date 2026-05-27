@@ -113,7 +113,7 @@ def grade_frame(frame, vignette, color_shift):
     # Smooth cinematic contrast (Soft S-Curve)
     # This replaces the discontinuous 'np.where' that caused horrific banding.
     smooth = f * f * (3.0 - 2.0 * f)
-    f = f * 0.8 + smooth * 0.2  # subtle 20% blend for a safe cinematic pop
+    f = f * 0.8 + smooth * 0.2  # 20% blend for subtle cinematic contrast pop
     
     f = f * vignette
     return np.clip(f * 255, 0, 255).astype(np.uint8)
