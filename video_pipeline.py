@@ -162,7 +162,7 @@ def handle_audio(video_duration, output_wav):
         except Exception as e:
             print(f"⚠️ Audio processing failed: {e}. Generating ambient.")
 
-    # Generate Ambient
+    # Generate ambient fallback drone tone
     print("🎵 No audio/background.mp3 found. Generating ambient drone...")
     sr = 48000
     t = np.linspace(0, video_duration, int(sr * video_duration), False)
