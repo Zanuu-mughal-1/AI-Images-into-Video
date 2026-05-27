@@ -120,7 +120,7 @@ def grade_frame(frame, vignette, color_shift):
 
 def deflicker(frames_dir):
     """Temporal smoothing pass over written PNGs."""
-    print("✨ Running deflicker pass ...")
+    print("✨ Running temporal deflicker pass...")
     files = sorted(glob.glob(f"{frames_dir}/frame_*.png"))
     if len(files) < 5: return
     
