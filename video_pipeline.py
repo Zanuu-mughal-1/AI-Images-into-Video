@@ -137,7 +137,7 @@ def deflicker(frames_dir):
         cv2.imwrite(files[i], np.clip(smoothed, 0, 255).astype(np.uint8))
 
 # ==============================================================================
-# 2. AUDIO & ENCODING
+# 2. AUDIO & ENCODING (WAV export + FFmpeg mux)
 # ==============================================================================
 
 def handle_audio(video_duration, output_wav):
