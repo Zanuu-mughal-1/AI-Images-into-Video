@@ -192,7 +192,7 @@ def main():
     FPS = cfg['fps']
     
     # Pre-compute Grading Masks
-    print("🎨 Pre-computing color grading masks...")
+    print("🎨 Pre-computing vignette and color grading masks...")
     Y, X = np.ogrid[:H, :W]
     cx, cy = W/2, H/2
     r = np.sqrt(((X-cx)/cx)**2 + ((Y-cy)/cy)**2)
