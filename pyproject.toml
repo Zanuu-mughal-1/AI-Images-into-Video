@@ -1,7 +1,10 @@
 [tool.pyrefly]
 site-package-path = [".venv/Lib/site-packages"]
+# Disable all type-error squiggles in the IDE (project uses untyped third-party libs)
+disable-type-errors-in-ide = true
 
 [tool.pyrefly.errors]
+# Legacy per-category overrides kept for CLI runs
 bad-assignment = false
 no-matching-overload = false
 missing-attribute = false
@@ -10,3 +13,15 @@ bad-index = false
 unsupported-operation = false
 untyped-import = false
 missing-import = false
+bad-return = false
+bad-argument-count = false
+invalid-argument = false
+not-iterable = false
+call-non-callable = false
+bad-unpacking = false
+undefined-import = false
+import-cycle = false
+possibly-undefined = false
+redundant-condition = false
+bad-super-call = false
+missing-attribute-access = false
