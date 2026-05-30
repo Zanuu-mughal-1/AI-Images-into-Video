@@ -73,6 +73,7 @@ def interpolate_frames(img1, img2, num_frames, flow=None):
     gray2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
 
     # Compute flow if not provided (re-use for efficiency if possible)
+    # Ok - computing optical flow
     if flow is None:
         flow = cv2.calcOpticalFlowFarneback(gray1, gray2, None, 0.5, 3, 15, 3, 5, 1.2, 0)
         # Apply median blur to flow field as requested
