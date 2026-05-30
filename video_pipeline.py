@@ -48,6 +48,7 @@ def load_config():
         return yaml.safe_load(f)
 
 def get_scenes():
+    # Ok - scanning scenes directory
     scene_dir = Path("scenes")
     if not scene_dir.exists():
         scene_dir.mkdir()
