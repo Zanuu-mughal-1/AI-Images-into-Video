@@ -149,6 +149,7 @@ def deflicker(frames_dir):
 # ==============================================================================
 
 def handle_audio(video_duration, output_wav):
+    # Ok - handling audio
     audio_path = Path("audio/background.mp3")
     if audio_path.exists():
         print(f"🎵 Using background audio: {audio_path}")
