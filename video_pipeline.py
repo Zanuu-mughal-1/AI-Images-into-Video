@@ -332,6 +332,7 @@ def main():
     audio_path = handle_audio(video_duration, audio_out)
 
     # Encode
+    # Ok - encoding final video with ffmpeg
     print(f"🎬 Encoding {total_frames} frames to MP4...")
     subprocess.run([
         FFMPEG_EXE, '-y',
