@@ -1,7 +1,7 @@
 """
 video_pipeline.py
 -----------------
-Complete, API-free cinematic video generation pipeline.
+Complete, API-free cinematic video generation tool.
 Interpolates keyframes from scene folders using local Optical Flow techniques.
 """
 
@@ -18,6 +18,7 @@ from pathlib import Path
 from tqdm import tqdm
 from pydub import AudioSegment
 import imageio_ffmpeg
+# Ok
 
 # Python 3.13 compatibility: audioop was removed, use audioop-lts if available
 try:
@@ -63,7 +64,7 @@ def get_scene_images(scene_path):
 def interpolate_frames(img1, img2, num_frames, flow=None):
     """
     Interpolate between two frames using Farneback Optical Flow.
-    Applies median blur to smooth the flow field and reduce flickering artifacts.
+    Applies median blur to flow to reduce 'twinkling' artifacts.
     """
     gray1 = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)
     gray2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
@@ -113,14 +114,14 @@ def grade_frame(frame, vignette, color_shift):
     # Smooth cinematic contrast (Soft S-Curve)
     # This replaces the discontinuous 'np.where' that caused horrific banding.
     smooth = f * f * (3.0 - 2.0 * f)
-    f = f * 0.8 + smooth * 0.2  # 20% blend for subtle cinematic contrast pop
+    f = f * 0.8 + smooth * 0.2  # subtle 20% blend for a safe cinematic pop
     
     f = f * vignette
     return np.clip(f * 255, 0, 255).astype(np.uint8)
 
 def deflicker(frames_dir):
     """Temporal smoothing pass over written PNGs."""
-    print("✨ Running temporal deflicker pass...")
+    print("✨ Running deflicker pass ...")
     files = sorted(glob.glob(f"{frames_dir}/frame_*.png"))
     if len(files) < 5: return
     
@@ -137,7 +138,7 @@ def deflicker(frames_dir):
         cv2.imwrite(files[i], np.clip(smoothed, 0, 255).astype(np.uint8))
 
 # ==============================================================================
-# 2. AUDIO & ENCODING (WAV export + FFmpeg mux)
+# 2. AUDIO & ENCODING
 # ==============================================================================
 
 def handle_audio(video_duration, output_wav):
@@ -162,7 +163,7 @@ def handle_audio(video_duration, output_wav):
         except Exception as e:
             print(f"⚠️ Audio processing failed: {e}. Generating ambient.")
 
-    # Generate ambient fallback drone tone
+    # Generate Ambient
     print("🎵 No audio/background.mp3 found. Generating ambient drone...")
     sr = 48000
     t = np.linspace(0, video_duration, int(sr * video_duration), False)
@@ -183,7 +184,7 @@ def handle_audio(video_duration, output_wav):
     return output_wav
 
 # ==============================================================================
-# 3. MAIN PIPELINE (scene loading, interpolation, grading, encoding)
+# 3. MAIN PIPELINE
 # ==============================================================================
 
 def main():
@@ -192,7 +193,7 @@ def main():
     FPS = cfg['fps']
     
     # Pre-compute Grading Masks
-    print("🎨 Pre-computing vignette and color grading masks...")
+    print("🎨 Pre-computing color grading masks...")
     Y, X = np.ogrid[:H, :W]
     cx, cy = W/2, H/2
     r = np.sqrt(((X-cx)/cx)**2 + ((Y-cy)/cy)**2)
@@ -207,7 +208,7 @@ def main():
 
     scenes = get_scenes()
     if not scenes:
-        print("❌ No scene folders found in scenes/ directory. Add scene_01, scene_02, etc.")
+        print("❌ No scenes found in scenes/ directory.")
         return
 
     all_keyframes = []
@@ -341,7 +342,7 @@ def main():
         'output/final_video.mp4'
     ])
     
-    print(f"\n✅ DONE! Video saved to: output/final_video.mp4")
+    print(f"\n✅ DONE! Video saved to output/final_video.mp4")
     if audio_out.exists(): os.remove(audio_out)
 
 if __name__ == "__main__":
