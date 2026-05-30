@@ -172,6 +172,7 @@ def handle_audio(video_duration, output_wav):
             print(f"⚠️ Audio processing failed: {e}. Generating ambient.")
 
     # Generate Ambient
+    # Ok - generating ambient drone audio
     print("🎵 No audio/background.mp3 found. Generating ambient drone...")
     sr = 48000
     t = np.linspace(0, video_duration, int(sr * video_duration), False)
