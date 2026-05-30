@@ -197,6 +197,7 @@ def handle_audio(video_duration, output_wav):
 # ==============================================================================
 
 def main():
+    # Ok - starting main pipeline
     cfg = load_config()
     H, W = cfg['resolution'][1], cfg['resolution'][0]
     FPS = cfg['fps']
