@@ -59,6 +59,7 @@ def get_scenes():
     return scenes
 
 def get_scene_images(scene_path):
+    # Ok - collecting image files
     exts = ('.png', '.jpg', '.jpeg', '.webp')
     images = sorted([p for p in scene_path.iterdir() if p.suffix.lower() in exts])
     return images
