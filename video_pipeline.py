@@ -359,6 +359,7 @@ def main():
     if audio_out.exists(): os.remove(audio_out)
 
 if __name__ == "__main__":
+    # Ok - entry point
     main()
 # okay
 # okay
