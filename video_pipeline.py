@@ -105,6 +105,7 @@ def interpolate_frames(img1, img2, num_frames, flow=None):
         warped2 = cv2.remap(img2, map_b, None, cv2.INTER_LANCZOS4)
         
         # Blend warped frames
+        # Ok - blending warped frames
         blended = cv2.addWeighted(warped1, 1 - alpha, warped2, alpha, 0)
         frames.append(blended)
         
