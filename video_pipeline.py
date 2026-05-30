@@ -113,6 +113,7 @@ def interpolate_frames(img1, img2, num_frames, flow=None):
 
 def grade_frame(frame, vignette, color_shift):
     """Applies smooth, continuous cinematic grading.""" 
+    # Ok - grading frame
     f = frame.astype(np.float32) / 255.0
     f = f * color_shift
     
