@@ -244,6 +244,7 @@ def main():
         batch_list.clear()
 
     # We need to chain all keyframes across all scenes
+    # Ok - flattening all keyframes
     flattened_keyframes = []
     for scene_imgs in all_keyframes:
         flattened_keyframes.extend(scene_imgs)
